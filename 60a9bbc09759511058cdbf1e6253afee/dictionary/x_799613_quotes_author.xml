@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Author" max_length="40" name="x_799613_quotes_author" sizeclass="10031" type="collection">
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;    if (current.u_surname.nil()) {&#13;&#10;        return current.u_name;&#13;&#10;    } else {&#13;&#10;        return current.u_name + ' ' + current.u_surname;&#13;&#10;    }&#13;&#10;&#13;&#10;})(current);" display="true" label="Display Name" max_length="400" name="display_name" type="string" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="200" name="u_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Surname" max_length="200" name="u_surname" type="string"/>
+    </element>
+</database>

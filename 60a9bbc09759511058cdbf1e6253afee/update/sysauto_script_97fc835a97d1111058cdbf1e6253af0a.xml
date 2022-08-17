@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <name>Select quote for a website</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2022-08-16 09:54:39</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[var currentCategory = gs.getProperty('x_799613_quotes.quotes_current_category'); 
+var nowDate = new GlideDateTime();
+var grQuote;
+	if(!selectQuote(currentCategory, nowDate)){
+			gs.info('MBL: Start of selection');
+		grQuote = new GlideRecord('x_799613_quotes_quotes');
+		grQuote.query();
+		grQuote.u_active = true;
+			gs.info('MBL: Setting u_active to true');
+		grQuote.u_date_active = '';
+			gs.info('MBL: Setting u_date_active to empty');
+		grQuote.updateMultiple();
+			gs.info('MBL: Setting updating all records');
+		selectQuote(currentCategory, nowDate);
+		
+	}
+function selectQuote(currentCategory, nowDate){
+	var incList = [];
+		gs.info('MBL: Declaring variables for random');
+	var grQuote = new GlideRecord('x_799613_quotes_quotes');
+	grQuote.addEncodedQuery('u_active=true^u_date_activeISEMPTY^u_category!='+ currentCategory);
+		gs.info('MBL: EncodedQuery of required filtered values');
+	grQuote.query();
+		if (grQuote.hasNext()){
+		while (grQuote.next()) {  
+			incList.push(grQuote.getValue('sys_id'));
+		}
+		var random = Math.floor((Math.random() * incList.length));
+		var sys_id = incList[random];
+		grQuote = new GlideRecord('x_799613_quotes_quotes');
+			gs.info('Randomly selecting target Quote');
+		grQuote.get(sys_id);
+		grQuote.u_active = false;
+			gs.info('MBL: Setting u_active to false');
+		grQuote.u_date_active = nowDate;
+			gs.info('MBL: Setting u_date_active to current date');
+		grQuote.update();
+			gs.info('Updating Quotes data');
+		var grPro = new GlideRecord('sys_properties');
+		grPro.addQuery('name','x_799613_quotes.quotes_current_category');
+		grPro.query();
+			gs.info('Storing category data');
+		if (grPro.next()) {
+			grPro.value = grQuote.u_category;
+			grPro.update();
+		}
+			gs.info('Updating category data');
+		return true;
+		}else{
+			return false;
+		}
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-16 10:11:57</sys_created_on>
+        <sys_id>97fc835a97d1111058cdbf1e6253af0a</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Select quote for a website</sys_name>
+        <sys_package display_value="Quotes" source="x_799613_quotes">60a9bbc09759511058cdbf1e6253afee</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Quotes">60a9bbc09759511058cdbf1e6253afee</sys_scope>
+        <sys_update_name>sysauto_script_97fc835a97d1111058cdbf1e6253af0a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-08-16 12:00:02</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

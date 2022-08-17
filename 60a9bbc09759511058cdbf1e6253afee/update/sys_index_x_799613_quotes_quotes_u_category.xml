@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_index">
+    <sys_index action="INSERT_OR_UPDATE">
+        <col_name_string>u_category</col_name_string>
+        <index_col_name element="u_category" name="x_799613_quotes_quotes">02fdfb089759511058cdbf1e6253af7e</index_col_name>
+        <logical_table_name>x_799613_quotes_quotes</logical_table_name>
+        <sys_class_name>sys_index</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2022-08-09 14:36:51</sys_created_on>
+        <sys_id>b07ac4dc9799511058cdbf1e6253af27</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_799613_quotes_quotes</sys_name>
+        <sys_package display_value="Quotes" source="x_799613_quotes">60a9bbc09759511058cdbf1e6253afee</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Quotes">60a9bbc09759511058cdbf1e6253afee</sys_scope>
+        <sys_update_name>sys_index_x_799613_quotes_quotes_u_category</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2022-08-09 14:36:51</sys_updated_on>
+        <table display_value="Quotes" name="x_799613_quotes_quotes">c7c9bb049759511058cdbf1e6253afc8</table>
+        <unique_index>false</unique_index>
+    </sys_index>
+</record_update>
